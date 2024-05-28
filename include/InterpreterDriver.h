@@ -11,6 +11,8 @@
 // Lexer subclass
 #include <InterpreterFlexLexer.h>
 
+#include <Program.h>
+
 class InterpreterDriver {
 
     public:
@@ -20,6 +22,8 @@ class InterpreterDriver {
         virtual ~InterpreterDriver();
 
         // class fields
+        Program program;
+
         int result;
 
         std::map<std::string, int> variables;

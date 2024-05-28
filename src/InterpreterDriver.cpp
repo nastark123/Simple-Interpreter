@@ -1,7 +1,7 @@
 #include <InterpreterDriver.h>
 
 InterpreterDriver::InterpreterDriver() : trace_scanning(false), trace_parsing(false) {
-
+    program = Program();
 }
 
 InterpreterDriver::~InterpreterDriver() {
