@@ -34,7 +34,7 @@ blank [ \t\r]
 %}
 
 {blank}+ loc.step();
-[\n]+    loc.lines(yyleng); loc.step(); return yy::InterpreterParser::make_NLINE(loc);
+[\n]+    loc.lines(yyleng); loc.step(); // return yy::InterpreterParser::make_NLINE(loc);
 
 "-" return yy::InterpreterParser::make_MINUS(loc);
 "+" return yy::InterpreterParser::make_PLUS(loc);
@@ -43,6 +43,8 @@ blank [ \t\r]
 "(" return yy::InterpreterParser::make_LPAREN(loc);
 ")" return yy::InterpreterParser::make_RPAREN(loc);
 "=" return yy::InterpreterParser::make_ASSIGN(loc);
+">" return yy::InterpreterParser::make_GREATER(loc);
+"<" return yy::InterpreterParser::make_LESS(loc);
 
 {int} {
         errno = 0;

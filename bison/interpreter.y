@@ -13,7 +13,13 @@
 
     #include <AbstractSyntaxTreeNode.h>
     #include <expressions/AddExp.h>
+    #include <expressions/SubExp.h>
+    #include <expressions/MultExp.h>
+    #include <expressions/DivExp.h>
     #include <expressions/ConstExp.h>
+    #include <expressions/VarExp.h>
+    #include <statements/AssignStatement.h>
+    #include <statements/PrintStatement.h>
 
     class InterpreterDriver;
 }
@@ -50,43 +56,36 @@
     LPAREN "("
     RPAREN ")"
     NLINE "\n"
+    GREATER ">"
+    LESS "<"
     ;
 
 %token <std::string> IDENTIFIER "identifier"
 %token <int> INTEGER "integer"
 %nterm <AbstractSyntaxTreeNode*> start;
-%nterm <AbstractSyntaxTreeNode*> line
-%nterm <AbstractSyntaxTreeNode*> exprorassign
+%nterm <Statement*> statement
 %nterm <Expression*> expr
-%nterm <AbstractSyntaxTreeNode*> assign
 
 %left "+" "-"
 %left "*" "/"
 %%
 
-start : line       {driver.program.add_line($1);}
-      | start line {driver.program.add_line($2);}
+start : statement       {driver.program.add_line($1);}
+      | start statement {driver.program.add_line($2);}
       ;
 
-line : exprorassign "\n" {$$ = $1;}
-     | exprorassign      {$$ = $1;}
-     ;
-
-exprorassign : expr {$$ = $1; printf("%d\n", $1);}
-             /*| assign {$$ = $1;}*/
-             ;
-
 expr : expr PLUS expr    {$$ = new AddExp($1, $3);}
-     /*| expr MINUS expr*/   
-     /*| expr STAR expr   */ 
-     /*| expr SLASH expr   */
+     | expr MINUS expr   {$$ = new SubExp($1, $3);}
+     | expr STAR expr    {$$ = new MultExp($1, $3);}
+     | expr SLASH expr   {$$ = new DivExp($1, $3);}
      /*| LPAREN expr RPAREN */
      | INTEGER    {$$ = new ConstExp(new IntegerValue($1));}
-     /*| IDENTIFIER {$$ = driver.variables[$1];}*/
+     | IDENTIFIER {$$ = new VarExp($1);}
      ;
 
-/*assign : IDENTIFIER ASSIGN expr    {$$ = $3; driver.variables[$1] = $3;}*/
-       /*;*/
+statement : IDENTIFIER ASSIGN expr    {$$ = new AssignStatement($1, $3);}
+          | GREATER expr              {$$ = new PrintStatement($2);}
+          ;
 
 %%
 
