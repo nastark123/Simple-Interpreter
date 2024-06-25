@@ -4,7 +4,7 @@
 #include <AbstractSyntaxTreeNode.h>
 #include <Visitor.h>
 
-// class AbstractSyntaxTreeNode;
+class AbstractSyntaxTreeNode;
 class Visitor;
 
 class Expression : public AbstractSyntaxTreeNode {

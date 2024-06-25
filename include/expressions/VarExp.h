@@ -1,5 +1,7 @@
-#ifndef CONSTEXP_H
-#define CONSTEXP_H
+#ifndef VAREXP_H
+#define VAREXP_H
+
+#include <string>
 
 #include <Environment.h>
 #include <expressions/Expression.h>
@@ -9,19 +11,19 @@
 class Expression;
 class Visitor;
 
-class ConstExp : public Expression {
+class VarExp : public Expression {
 
     private:
-        Value* value;
+        std::string name;
 
     public:
-        ConstExp(Value* value);
+        VarExp(std::string name);
 
-        ~ConstExp();
+        ~VarExp();
 
         Value* accept(Visitor& visitor, Environment& env);
 
-        Value* get_value();
+        std::string get_name();
 
 };
 

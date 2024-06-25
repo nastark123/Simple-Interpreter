@@ -1,9 +1,11 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
+#include <cstdio>
 #include <list>
+#include <string>
 
-#include <AbstractSyntaxTreeNode.h>
+#include <statements/Statement.h>
 #include <Environment.h>
 #include <Evaluator.h>
 
@@ -14,14 +16,18 @@ class Program {
 
         Evaluator evaluator;
 
-        std::list<AbstractSyntaxTreeNode*> lines;
+        std::list<Statement*> lines;
 
     public:
         Program();
 
         ~Program();
 
-        void add_line(AbstractSyntaxTreeNode* line);
+        void add_line(Statement* line);
+
+        // void set_var(Value* value);
+
+        // Value* get_var(std::string name);
 
         void execute();
 

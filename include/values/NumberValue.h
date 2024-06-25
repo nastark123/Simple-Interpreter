@@ -5,6 +5,9 @@
 
 class NumberValue : public Value {
     
+    public:
+        virtual std::string get_type() = 0;
+    
 };
 
 #endif

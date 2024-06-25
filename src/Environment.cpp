@@ -1,5 +1,9 @@
 #include <Environment.h>
 
 Environment::Environment() {
-    map = std::map<std::string, Value>();
+    variables = std::map<std::string, Value*>();
+}
+
+Environment::~Environment() {
+
 }

@@ -18,6 +18,8 @@ int InterpreterDriver::parse(const std::string& f) {
 
     int res = parser.parse();
 
+    program.execute();
+
     scan_end();
 
     return res;

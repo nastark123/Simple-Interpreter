@@ -9,7 +9,7 @@
 class Environment {
 
     public:
-        std::map<std::string, Value> variables;
+        std::map<std::string, Value*> variables;
 
         Environment();
 
