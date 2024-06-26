@@ -16,10 +16,12 @@
     #include <expressions/SubExp.h>
     #include <expressions/MultExp.h>
     #include <expressions/DivExp.h>
+    #include <expressions/EqualExp.h>
     #include <expressions/ConstExp.h>
     #include <expressions/VarExp.h>
     #include <statements/AssignStatement.h>
     #include <statements/PrintStatement.h>
+    #include <statements/IfStatement.h>
 
     class InterpreterDriver;
 }
@@ -48,6 +50,8 @@
 %define api.token.prefix {TOK_}
 %token
     END 0 "end of file"
+    IF "if"
+    EQUAL "=="
     ASSIGN "="
     MINUS  "-"
     PLUS   "+"
@@ -55,6 +59,8 @@
     SLASH  "/"
     LPAREN "("
     RPAREN ")"
+    LBRACKET "{"
+    RBRACKET "}"
     NLINE "\n"
     GREATER ">"
     LESS "<"
@@ -78,6 +84,7 @@ expr : expr PLUS expr    {$$ = new AddExp($1, $3);}
      | expr MINUS expr   {$$ = new SubExp($1, $3);}
      | expr STAR expr    {$$ = new MultExp($1, $3);}
      | expr SLASH expr   {$$ = new DivExp($1, $3);}
+     | expr EQUAL expr   {$$ = new EqualExp($1, $3);}
      /*| LPAREN expr RPAREN */
      | INTEGER    {$$ = new ConstExp(new IntegerValue($1));}
      | IDENTIFIER {$$ = new VarExp($1);}
@@ -85,6 +92,7 @@ expr : expr PLUS expr    {$$ = new AddExp($1, $3);}
 
 statement : IDENTIFIER ASSIGN expr    {$$ = new AssignStatement($1, $3);}
           | GREATER expr              {$$ = new PrintStatement($2);}
+          | IF LPAREN expr RPAREN LBRACKET statement RBRACKET {$$ = new IfStatement($3, $6);}
           ;
 
 %%

@@ -12,10 +12,12 @@ class AddExp;
 class SubExp;
 class MultExp;
 class DivExp;
+class EqualExp;
 class ConstExp;
 class VarExp;
 class AssignStatement;
 class PrintStatement;
+class IfStatement;
 
 class Visitor {
 
@@ -28,7 +30,7 @@ class Visitor {
 
         virtual Value* visit(DivExp& exp, Environment& env) = 0;
 
-        // virtual Value* visit(AssignExp exp, Environment env) = 0;
+        virtual Value* visit(EqualExp& exp, Environment& env) = 0;
 
         virtual Value* visit(ConstExp& exp, Environment& env) = 0;
 
@@ -37,6 +39,8 @@ class Visitor {
         virtual void visit(AssignStatement& st, Environment& env) = 0;
 
         virtual void visit(PrintStatement& st, Environment& env) = 0;
+
+        virtual void visit(IfStatement& st, Environment& env) = 0;
 
 };
 
