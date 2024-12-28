@@ -37,6 +37,7 @@ blank [ \t\r]
 [\n]+    loc.lines(yyleng); loc.step(); // return yy::InterpreterParser::make_NLINE(loc);
 
 "if" return yy::InterpreterParser::make_IF(loc);
+"while" return yy::InterpreterParser::make_WHILE(loc);
 "-" return yy::InterpreterParser::make_MINUS(loc);
 "+" return yy::InterpreterParser::make_PLUS(loc);
 "*" return yy::InterpreterParser::make_STAR(loc);

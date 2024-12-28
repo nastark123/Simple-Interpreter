@@ -15,9 +15,11 @@ class DivExp;
 class EqualExp;
 class ConstExp;
 class VarExp;
+class Statements;
 class AssignStatement;
 class PrintStatement;
 class IfStatement;
+class WhileStatement;
 
 class Visitor {
 
@@ -36,11 +38,15 @@ class Visitor {
 
         virtual Value* visit(VarExp& exp, Environment& env) = 0;
 
+        virtual void visit(Statements& statements, Environment& env) = 0;
+
         virtual void visit(AssignStatement& st, Environment& env) = 0;
 
         virtual void visit(PrintStatement& st, Environment& env) = 0;
 
         virtual void visit(IfStatement& st, Environment& env) = 0;
+
+        virtual void visit(WhileStatement& st, Environment& env) = 0;
 
 };
 

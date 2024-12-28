@@ -11,9 +11,11 @@
 #include <expressions/EqualExp.h>
 #include <expressions/ConstExp.h>
 #include <expressions/VarExp.h>
+#include <statements/Statements.h>
 #include <statements/AssignStatement.h>
 #include <statements/PrintStatement.h>
 #include <statements/IfStatement.h>
+#include <statements/WhileStatement.h>
 #include <values/ErrorValue.h>
 #include <values/IntegerValue.h>
 #include <values/BooleanValue.h>
@@ -38,11 +40,15 @@ class Evaluator : public Visitor {
 
         Value* visit(VarExp& exp, Environment& env);
 
+        void visit(Statements& st, Environment& env);
+
         void visit(AssignStatement& st, Environment& env);
 
         void visit(PrintStatement& st, Environment& env);
 
         void visit(IfStatement& st, Environment& env);
+
+        void visit(WhileStatement& st, Environment& env);
 
 };
 

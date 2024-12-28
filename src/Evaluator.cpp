@@ -69,6 +69,14 @@ Value* Evaluator::visit(VarExp& exp, Environment& env) {
     return env.variables[exp.get_name()];
 }
 
+void Evaluator::visit(Statements& st, Environment& env) {
+    Statements* statements = &st;
+    while(statements != nullptr) {
+        statements->get_statement()->accept(*this, env);
+        statements = statements->get_next();
+    }
+}
+
 void Evaluator::visit(AssignStatement& st, Environment& env) {
     env.variables[st.get_name()] = st.get_exp()->accept(*this, env);
 }
@@ -83,6 +91,15 @@ void Evaluator::visit(IfStatement& st, Environment& env) {
     BooleanValue* val = (BooleanValue*) st.get_exp()->accept(*this, env);
 
     if(val->get_value()) {
-        st.get_statement()->accept(*this, env);
+        st.get_statements()->accept(*this, env);
+    }
+}
+
+void Evaluator::visit(WhileStatement& st, Environment& env) {
+    BooleanValue* val = (BooleanValue*) st.get_exp()->accept(*this, env);
+
+    while(val->get_value()) {
+        st.get_statements()->accept(*this, env);
+        val = (BooleanValue*) st.get_exp()->accept(*this, env);
     }
 }
