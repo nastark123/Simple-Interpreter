@@ -17,6 +17,7 @@
     #include <expressions/MultExp.h>
     #include <expressions/DivExp.h>
     #include <expressions/EqualExp.h>
+    #include <expressions/GreaterExp.h>
     #include <expressions/ConstExp.h>
     #include <expressions/VarExp.h>
     #include <statements/Statements.h>
@@ -89,6 +90,7 @@ expr : expr PLUS expr    {$$ = new AddExp($1, $3);}
      | expr STAR expr    {$$ = new MultExp($1, $3);}
      | expr SLASH expr   {$$ = new DivExp($1, $3);}
      | expr EQUAL expr   {$$ = new EqualExp($1, $3);}
+     | expr GREATER expr {$$ = new GreaterExp($1, $3);}
      /*| LPAREN expr RPAREN */
      | INTEGER    {$$ = new ConstExp(new IntegerValue($1));}
      | IDENTIFIER {$$ = new VarExp($1);}

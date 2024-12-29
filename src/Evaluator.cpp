@@ -61,6 +61,23 @@ Value* Evaluator::visit(EqualExp& exp, Environment& env) {
     return new BooleanValue(false);
 }
 
+Value* Evaluator::visit(GreaterExp& exp, Environment& env) {
+    Value* lval = exp.get_lval().accept(*this, env);
+    Value* rval = exp.get_rval().accept(*this, env);
+
+    if(lval->get_type() != rval->get_type()) {
+        return new BooleanValue(false);
+    }
+
+    if(lval->get_type() == "int") {
+        IntegerValue* int_lval = (IntegerValue*) lval;
+        IntegerValue* int_rval = (IntegerValue*) rval;
+        return new BooleanValue(int_lval->get_value() > int_rval->get_value());
+    }
+
+    return new BooleanValue(false);
+}
+
 Value* Evaluator::visit(ConstExp& exp, Environment& env) {
     return exp.get_value();
 }

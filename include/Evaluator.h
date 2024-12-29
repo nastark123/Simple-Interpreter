@@ -9,6 +9,7 @@
 #include <expressions/MultExp.h>
 #include <expressions/DivExp.h>
 #include <expressions/EqualExp.h>
+#include <expressions/GreaterExp.h>
 #include <expressions/ConstExp.h>
 #include <expressions/VarExp.h>
 #include <statements/Statements.h>
@@ -35,6 +36,8 @@ class Evaluator : public Visitor {
         Value* visit(DivExp& exp, Environment& env);
 
         Value* visit(EqualExp& exp, Environment& env);
+
+        Value* visit(GreaterExp& exp, Environment& env);
 
         Value* visit(ConstExp& exp, Environment& env);
 
