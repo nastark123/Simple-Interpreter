@@ -38,6 +38,7 @@ Expressions : src/expressions/*.cpp
 	g++ -c src/expressions/DivExp.cpp -I include/ -I build/ -o build/DivExp.o
 	g++ -c src/expressions/EqualExp.cpp -I include/ -I build/ -o build/EqualExp.o
 	g++ -c src/expressions/GreaterExp.cpp -I include/ -I build/ -o build/GreaterExp.o
+	g++ -c src/expressions/LessExp.cpp -I include/ -I build/ -o build/LessExp.o
 	g++ -c src/expressions/ConstExp.cpp -I include/ -I build/ -o build/ConstExp.o
 	g++ -c src/expressions/VarExp.cpp -I include/ -I build/ -o build/VarExp.o
 

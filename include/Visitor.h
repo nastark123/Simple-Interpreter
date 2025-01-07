@@ -14,6 +14,7 @@ class MultExp;
 class DivExp;
 class EqualExp;
 class GreaterExp;
+class LessExp;
 class ConstExp;
 class VarExp;
 class Statements;
@@ -36,6 +37,8 @@ class Visitor {
         virtual Value* visit(EqualExp& exp, Environment& env) = 0;
 
         virtual Value* visit(GreaterExp& exp, Environment& env) = 0;
+
+        virtual Value* visit(LessExp& exp, Environment& env) = 0;
 
         virtual Value* visit(ConstExp& exp, Environment& env) = 0;
 
