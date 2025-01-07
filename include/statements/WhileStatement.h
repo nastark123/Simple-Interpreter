@@ -1,5 +1,5 @@
-#ifndef IFSTATEMENT_H
-#define IFSTATEMENT_H
+#ifndef WHILESTATEMENT_H
+#define WHILESTATEMENT_H
 
 #include <Environment.h>
 #include <expressions/Expression.h>
@@ -10,23 +10,23 @@ class Expression;
 class Statements;
 class Visitor;
 
-class IfStatement : public Statement {
+class WhileStatement : public Statement {
 
     private:
-        Expression* exp;
-        Statements* st;
+        Expression* exp; // expression for the while loop condition
+        Statements* st; // statement(s) to be executed in the while loop
 
     public:
-        IfStatement(Expression* exp, Statements* st);
+        WhileStatement(Expression* exp, Statements* st);
 
-        ~IfStatement();
+        ~WhileStatement();
 
         void accept(Visitor& visitor, Environment& env);
 
         Expression* get_exp();
 
         Statements* get_statements();
-
+        
 };
 
 #endif

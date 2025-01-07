@@ -1,6 +1,6 @@
 #include <statements/IfStatement.h>
 
-IfStatement::IfStatement(Expression* exp, Statement* st) {
+IfStatement::IfStatement(Expression* exp, Statements* st) {
     this->exp = exp;
     this->st = st;
 }
@@ -17,6 +17,6 @@ Expression* IfStatement::get_exp() {
     return exp;
 }
 
-Statement* IfStatement::get_statement() {
+Statements* IfStatement::get_statements() {
     return st;
 }

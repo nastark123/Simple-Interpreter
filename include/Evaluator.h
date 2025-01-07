@@ -9,11 +9,14 @@
 #include <expressions/MultExp.h>
 #include <expressions/DivExp.h>
 #include <expressions/EqualExp.h>
+#include <expressions/GreaterExp.h>
 #include <expressions/ConstExp.h>
 #include <expressions/VarExp.h>
+#include <statements/Statements.h>
 #include <statements/AssignStatement.h>
 #include <statements/PrintStatement.h>
 #include <statements/IfStatement.h>
+#include <statements/WhileStatement.h>
 #include <values/ErrorValue.h>
 #include <values/IntegerValue.h>
 #include <values/BooleanValue.h>
@@ -34,15 +37,21 @@ class Evaluator : public Visitor {
 
         Value* visit(EqualExp& exp, Environment& env);
 
+        Value* visit(GreaterExp& exp, Environment& env);
+
         Value* visit(ConstExp& exp, Environment& env);
 
         Value* visit(VarExp& exp, Environment& env);
+
+        void visit(Statements& st, Environment& env);
 
         void visit(AssignStatement& st, Environment& env);
 
         void visit(PrintStatement& st, Environment& env);
 
         void visit(IfStatement& st, Environment& env);
+
+        void visit(WhileStatement& st, Environment& env);
 
 };
 
