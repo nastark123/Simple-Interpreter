@@ -50,6 +50,7 @@ blank [ \t\r]
 ">" return yy::InterpreterParser::make_GREATER(loc);
 "<" return yy::InterpreterParser::make_LESS(loc);
 "=" return yy::InterpreterParser::make_ASSIGN(loc);
+"|" return yy::InterpreterParser::make_PIPE(loc);
 
 {int} {
         errno = 0;
