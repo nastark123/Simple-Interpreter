@@ -22,7 +22,7 @@ Value* IntegerValue::operator_equals(Value* other) {
         return new ErrorValue("Error: Cannot compare mismatched types");
     }
 
-    return new BooleanValue(((IntegerValue*) other)->get_value() == this->get_value());
+    return new BooleanValue(this->get_value() == ((IntegerValue*) other)->get_value());
 }
 
 Value* IntegerValue::operator_greater(Value* other) {
@@ -30,7 +30,7 @@ Value* IntegerValue::operator_greater(Value* other) {
         return new ErrorValue("Error: Cannot compare mismatched types");
     }
 
-    return new BooleanValue(((IntegerValue*) other)->get_value() > this->get_value());
+    return new BooleanValue(this->get_value() > ((IntegerValue*) other)->get_value());
 }
 
 Value* IntegerValue::operator_less(Value* other) {
@@ -38,7 +38,7 @@ Value* IntegerValue::operator_less(Value* other) {
         return new ErrorValue("Error: Cannot compare mismatched types");
     }
 
-    return new BooleanValue(((IntegerValue*) other)->get_value() < this->get_value());
+    return new BooleanValue(this->get_value() < ((IntegerValue*) other)->get_value());
 }
 
 Value* IntegerValue::operator_plus(Value* other) {
@@ -46,7 +46,7 @@ Value* IntegerValue::operator_plus(Value* other) {
         return new ErrorValue("Error: Cannot add mismatched types");
     }
 
-    return new IntegerValue(((IntegerValue*) other)->get_value() + this->get_value());
+    return new IntegerValue(this->get_value() + ((IntegerValue*) other)->get_value());
 }
 
 Value* IntegerValue::operator_minus(Value* other) {
@@ -54,7 +54,7 @@ Value* IntegerValue::operator_minus(Value* other) {
         return new ErrorValue("Error: Cannot subtract mismatched types");
     }
 
-    return new IntegerValue(((IntegerValue*) other)->get_value() - this->get_value());
+    return new IntegerValue(this->get_value() - ((IntegerValue*) other)->get_value());
 }
 
 Value* IntegerValue::operator_star(Value* other) {
@@ -62,7 +62,7 @@ Value* IntegerValue::operator_star(Value* other) {
         return new ErrorValue("Error: Cannot multiply mismatched types");
     }
 
-    return new IntegerValue(((IntegerValue*) other)->get_value() * this->get_value());
+    return new IntegerValue(this->get_value() * ((IntegerValue*) other)->get_value());
 }
 
 Value* IntegerValue::operator_slash(Value* other) {
@@ -75,5 +75,5 @@ Value* IntegerValue::operator_slash(Value* other) {
         return new ErrorValue("Error: Cannot divide by zero");
     }
 
-    return new IntegerValue(((IntegerValue*) other)->get_value() / this->get_value());
+    return new IntegerValue(this->get_value() / ((IntegerValue*) other)->get_value());
 }
