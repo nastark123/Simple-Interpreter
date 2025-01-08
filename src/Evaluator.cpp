@@ -1,98 +1,52 @@
 #include <Evaluator.h>
 
 Value* Evaluator::visit(AddExp& exp, Environment& env) {
-    NumberValue* lval = (NumberValue*) exp.get_lval().accept(*this, env);
-    NumberValue* rval = (NumberValue*) exp.get_rval().accept(*this, env);
+    Value* lval = exp.get_lval().accept(*this, env);
+    Value* rval = exp.get_rval().accept(*this, env);
 
-    if(lval->get_type() != rval->get_type()) {
-        return new ErrorValue("Error: mismatched types for addition");
-    }
-
-    return new IntegerValue(((IntegerValue*) lval)->get_value() + ((IntegerValue*) rval)->get_value());
+    return lval->operator_plus(rval);
 }
 
 Value* Evaluator::visit(SubExp& exp, Environment& env) {
-    NumberValue* lval = (NumberValue*) exp.get_lval().accept(*this, env);
-    NumberValue* rval = (NumberValue*) exp.get_rval().accept(*this, env);
+    Value* lval = exp.get_lval().accept(*this, env);
+    Value* rval = exp.get_rval().accept(*this, env);
 
-    if(lval->get_type() != rval->get_type()) {
-        return new ErrorValue("Error: mismatched types for addition");
-    }
-
-    return new IntegerValue(((IntegerValue*) lval)->get_value() - ((IntegerValue*) rval)->get_value());
+    return lval->operator_minus(rval);
 }
 
 Value* Evaluator::visit(MultExp& exp, Environment& env) {
-    NumberValue* lval = (NumberValue*) exp.get_lval().accept(*this, env);
-    NumberValue* rval = (NumberValue*) exp.get_rval().accept(*this, env);
+    Value* lval = exp.get_lval().accept(*this, env);
+    Value* rval = exp.get_rval().accept(*this, env);
 
-    if(lval->get_type() != rval->get_type()) {
-        return new ErrorValue("Error: mismatched types for addition");
-    }
-
-    return new IntegerValue(((IntegerValue*) lval)->get_value() * ((IntegerValue*) rval)->get_value());
+    return lval->operator_star(rval);
 }
 
 Value* Evaluator::visit(DivExp& exp, Environment& env) {
-    NumberValue* lval = (NumberValue*) exp.get_lval().accept(*this, env);
-    NumberValue* rval = (NumberValue*) exp.get_rval().accept(*this, env);
+    Value* lval = exp.get_lval().accept(*this, env);
+    Value* rval = exp.get_rval().accept(*this, env);
 
-    if(lval->get_type() != rval->get_type()) {
-        return new ErrorValue("Error: mismatched types for addition");
-    }
-
-    return new IntegerValue(((IntegerValue*) lval)->get_value() / ((IntegerValue*) rval)->get_value());
+    return lval->operator_slash(rval);
 }
 
 Value* Evaluator::visit(EqualExp& exp, Environment& env) {
     Value* lval = exp.get_lval().accept(*this, env);
     Value* rval = exp.get_rval().accept(*this, env);
 
-    if(lval->get_type() != rval->get_type()) {
-        return new BooleanValue(false);
-    }
-
-    if(lval->get_type() == "int") {
-        IntegerValue* int_lval = (IntegerValue*) lval;
-        IntegerValue* int_rval = (IntegerValue*) rval;
-        return new BooleanValue(int_lval->get_value() == int_rval->get_value());
-    }
-
-    return new BooleanValue(false);
+    return lval->operator_equals(rval);
 }
 
 Value* Evaluator::visit(GreaterExp& exp, Environment& env) {
     Value* lval = exp.get_lval().accept(*this, env);
     Value* rval = exp.get_rval().accept(*this, env);
 
-    if(lval->get_type() != rval->get_type()) {
-        return new BooleanValue(false);
-    }
-
-    if(lval->get_type() == "int") {
-        IntegerValue* int_lval = (IntegerValue*) lval;
-        IntegerValue* int_rval = (IntegerValue*) rval;
-        return new BooleanValue(int_lval->get_value() > int_rval->get_value());
-    }
-
-    return new BooleanValue(false);
+    return lval->operator_greater(rval);
 }
 
 Value* Evaluator::visit(LessExp& exp, Environment& env) {
     Value* lval = exp.get_lval().accept(*this, env);
     Value* rval = exp.get_rval().accept(*this, env);
 
-    if(lval->get_type() != rval->get_type()) {
-        return new BooleanValue(false);
-    }
-
-    if(lval->get_type() == "int") {
-        IntegerValue* int_lval = (IntegerValue*) lval;
-        IntegerValue* int_rval = (IntegerValue*) rval;
-        return new BooleanValue(int_lval->get_value() < int_rval->get_value());
-    }
-
-    return new BooleanValue(false);
+    return lval->operator_less(rval);
 }
 
 Value* Evaluator::visit(ConstExp& exp, Environment& env) {
